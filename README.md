@@ -9,6 +9,7 @@ A lightweight AnyMail-Finder-style MVP.
 - Searches the public web for evidence of the person, domain, and email format
 - Returns a scored best guess plus alternatives
 - Supports bulk CSV processing
+- Includes a simple web UI
 
 ## Why this exists
 This is an 80/20 tool. It does **confidence scoring**, not perfect mailbox verification.
@@ -64,6 +65,23 @@ Output CSV adds:
 - `alternative_3`
 - `status`
 - `error`
+
+## Web UI
+Run:
+```bash
+npm run web
+```
+
+Then open:
+```text
+http://localhost:3000
+```
+
+The UI supports:
+- single lookups from a simple form
+- bulk CSV upload
+- preview table for results
+- CSV download for processed bulk output
 
 Optional Brave API key for better search results:
 ```bash
