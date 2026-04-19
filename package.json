@@ -1,0 +1,23 @@
+{
+  "name": "email-finder-mvp",
+  "version": "0.1.0",
+  "description": "Scrappy email finder MVP: domain resolution, pattern guessing, MX checks, and public-evidence scoring.",
+  "type": "module",
+  "bin": {
+    "email-finder": "./src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "email",
+    "finder",
+    "lead-enrichment",
+    "mx"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^14.0.0"
+  }
+}
