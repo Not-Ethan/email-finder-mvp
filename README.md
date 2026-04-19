@@ -8,6 +8,7 @@ A lightweight AnyMail-Finder-style MVP.
 - Checks MX records
 - Searches the public web for evidence of the person, domain, and email format
 - Returns a scored best guess plus alternatives
+- Supports bulk CSV processing
 
 ## Why this exists
 This is an 80/20 tool. It does **confidence scoring**, not perfect mailbox verification.
@@ -17,11 +18,52 @@ This is an 80/20 tool. It does **confidence scoring**, not perfect mailbox verif
 npm install
 ```
 
-## Usage
+## Current input format
+### Single lookup
 ```bash
 node src/cli.js find --name "John Smith" --company "OpenAI"
 node src/cli.js find --name "John Smith" --domain "openai.com"
 ```
+
+Current single-record inputs:
+- `--name`: full name
+- `--company`: company name
+- `--domain`: company domain
+
+You must pass `--company` or `--domain`.
+
+### Bulk CSV
+```bash
+node src/cli.js bulk --input leads.csv --output results.csv
+```
+
+Input CSV columns:
+- `first` (required)
+- `middle` (optional)
+- `last` (required)
+- `company` (optional if `domain` is present)
+- `domain` (optional if `company` is present)
+
+Example input CSV:
+```csv
+first,middle,last,company,domain
+John,,Smith,OpenAI,
+Sam,,Altman,,openai.com
+Ada,Lovelace,Byron,Analytical Engines,
+```
+
+Output CSV adds:
+- `full_name`
+- `resolved_domain`
+- `top_email`
+- `confidence`
+- `pattern`
+- `mx`
+- `alternative_1`
+- `alternative_2`
+- `alternative_3`
+- `status`
+- `error`
 
 Optional Brave API key for better search results:
 ```bash
@@ -29,7 +71,7 @@ export BRAVE_API_KEY=...
 ```
 
 ## Output
-The CLI prints JSON like:
+The single-record CLI prints JSON like:
 
 ```json
 {
